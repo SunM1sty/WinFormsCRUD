@@ -1,12 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Database
@@ -26,11 +18,6 @@ namespace Database
                 this.bankDepositsBindingSource.EndEdit();
                 this.tableAdapterManager.UpdateAll(this.dataSet1);
             }
-            catch (SqlException ex)
-            {        
-                MessageBox.Show(ex.Message);
-                this.bankDepositsTableAdapter.Fill(this.dataSet1.BankDeposits);
-            }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
@@ -45,11 +32,6 @@ namespace Database
 
         }
 
-        private void bankDepositsBindingNavigator_RefreshItems(object sender, EventArgs e)
-        {
-
-        }
-
         private void button2_Click(object sender, EventArgs e)
         {
             try
@@ -57,24 +39,23 @@ namespace Database
                 bankDepositsBindingSource.EndEdit();
                 bankDepositsTableAdapter.Update(dataSet1);
             }
-            catch(SqlException ex)
-            {
-                if (ex.Message.Contains("CK__BankDepos__Minim__59FA5E80"))
-                {
-                    MessageBox.Show("Ошибка: вы ввели неправильную сумму минимального депозита");
-                }
-                if (ex.Message.Contains("CK__BankDepos__Perce__5AEE82B9"))
-                {
-                    MessageBox.Show("Ошибка: вы ввели неправильную процент мин. дпепозита");
-                    MessageBox.Show(ex.Message);
-                }
-                this.bankDepositsTableAdapter.Fill(this.dataSet1.BankDeposits);
-
-            }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
-                this.bankDepositsTableAdapter.Fill(this.dataSet1.BankDeposits);
+                if (ex.Message.Contains("MinimumDeposit"))
+                {
+                    MessageBox.Show("Минимальная сумма депозита не менее 10тыс. и не более 1 млрд.");
+                    this.bankDepositsTableAdapter.Fill(this.dataSet1.BankDeposits);
+                }
+                else if (ex.Message.Contains("PercentPerYear"))
+                {
+                    MessageBox.Show("Максимальный процент в год не более 20%");
+                    this.bankDepositsTableAdapter.Fill(this.dataSet1.BankDeposits);
+                }
+                else
+                {
+                    MessageBox.Show(ex.Message);
+                    this.bankDepositsTableAdapter.Fill(this.dataSet1.BankDeposits);
+                }
             }
         }
 

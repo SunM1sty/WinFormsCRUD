@@ -1,12 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Database
@@ -25,11 +17,6 @@ namespace Database
                 this.Validate();
                 this.customersBindingSource.EndEdit();
                 this.tableAdapterManager.UpdateAll(this.dataSet1);
-            }
-            catch (SqlException ex)
-            {
-                MessageBox.Show(ex.Message);
-                this.customersTableAdapter.Fill(this.dataSet1.Customers);
             }
             catch (Exception ex)
             {
@@ -59,11 +46,8 @@ namespace Database
             }
             catch (Exception ex)
             {
-                if (ex.Message.Contains("PropertyID"))
-                {
-                    MessageBox.Show("Вы не указали PropertyID!");
-                    this.customersTableAdapter.Fill(this.dataSet1.Customers);
-                }
+                MessageBox.Show(ex.Message);
+                this.customersTableAdapter.Fill(this.dataSet1.Customers);
             }
         }
     }

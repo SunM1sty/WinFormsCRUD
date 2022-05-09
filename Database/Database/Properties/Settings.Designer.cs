@@ -33,5 +33,16 @@ namespace Database.Properties {
                 return ((string)(this["dbomarkConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-TT3J386\\SQLEXPRESS;Initial Catalog=mark;Integrated Security=T" +
+            "rue")]
+        public string markConnectionString {
+            get {
+                return ((string)(this["markConnectionString"]));
+            }
+        }
     }
 }

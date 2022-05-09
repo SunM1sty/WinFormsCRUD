@@ -38,10 +38,6 @@ namespace Database {
         
         private SecuritiesDataTable tableSecurities;
         
-        private global::System.Data.DataRelation relationFK__Quotation__Paper__59063A47;
-        
-        private global::System.Data.DataRelation relationFK__Quotation__Secur__5812160E;
-        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -342,8 +338,6 @@ namespace Database {
                     this.tableSecurities.InitVars();
                 }
             }
-            this.relationFK__Quotation__Paper__59063A47 = this.Relations["FK__Quotation__Paper__59063A47"];
-            this.relationFK__Quotation__Secur__5812160E = this.Relations["FK__Quotation__Secur__5812160E"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -368,14 +362,6 @@ namespace Database {
             base.Tables.Add(this.tableQuotation);
             this.tableSecurities = new SecuritiesDataTable();
             base.Tables.Add(this.tableSecurities);
-            this.relationFK__Quotation__Paper__59063A47 = new global::System.Data.DataRelation("FK__Quotation__Paper__59063A47", new global::System.Data.DataColumn[] {
-                        this.tablePaperInvestment.PaperInvestmentIDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableQuotation.PaperInvestmentIDColumn}, false);
-            this.Relations.Add(this.relationFK__Quotation__Paper__59063A47);
-            this.relationFK__Quotation__Secur__5812160E = new global::System.Data.DataRelation("FK__Quotation__Secur__5812160E", new global::System.Data.DataColumn[] {
-                        this.tableSecurities.SecuritiesIDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableQuotation.SecuritiesIDColumn}, false);
-            this.Relations.Add(this.relationFK__Quotation__Secur__5812160E);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1006,6 +992,8 @@ namespace Database {
                 this.columnBankInvestmentID.AllowDBNull = false;
                 this.columnBankInvestmentID.ReadOnly = true;
                 this.columnBankInvestmentID.Unique = true;
+                this.columnBankDepositID.AllowDBNull = false;
+                this.columnCustomerID.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1660,6 +1648,8 @@ namespace Database {
                 this.columnPaperInvestmentID.AllowDBNull = false;
                 this.columnPaperInvestmentID.ReadOnly = true;
                 this.columnPaperInvestmentID.Unique = true;
+                this.columnSecuritiesID.AllowDBNull = false;
+                this.columnCustomerID.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2190,20 +2180,14 @@ namespace Database {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public QuotationRow AddQuotationRow(PaperInvestmentRow parentPaperInvestmentRowByFK__Quotation__Paper__59063A47, decimal Price, System.DateTime Date, SecuritiesRow parentSecuritiesRowByFK__Quotation__Secur__5812160E) {
+            public QuotationRow AddQuotationRow(int PaperInvestmentID, decimal Price, System.DateTime Date, int SecuritiesID) {
                 QuotationRow rowQuotationRow = ((QuotationRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
-                        null,
+                        PaperInvestmentID,
                         Price,
                         Date,
-                        null};
-                if ((parentPaperInvestmentRowByFK__Quotation__Paper__59063A47 != null)) {
-                    columnValuesArray[1] = parentPaperInvestmentRowByFK__Quotation__Paper__59063A47[0];
-                }
-                if ((parentSecuritiesRowByFK__Quotation__Secur__5812160E != null)) {
-                    columnValuesArray[4] = parentSecuritiesRowByFK__Quotation__Secur__5812160E[0];
-                }
+                        SecuritiesID};
                 rowQuotationRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowQuotationRow);
                 return rowQuotationRow;
@@ -2263,6 +2247,7 @@ namespace Database {
                 this.columnQuotationID.AllowDBNull = false;
                 this.columnQuotationID.ReadOnly = true;
                 this.columnPaperInvestmentID.AllowDBNull = false;
+                this.columnSecuritiesID.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2880,12 +2865,7 @@ namespace Database {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public int BankDepositID {
                 get {
-                    try {
-                        return ((int)(this[this.tableBankInvestment.BankDepositIDColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'BankDepositID\' in table \'BankInvestment\' is DBNull.", e);
-                    }
+                    return ((int)(this[this.tableBankInvestment.BankDepositIDColumn]));
                 }
                 set {
                     this[this.tableBankInvestment.BankDepositIDColumn] = value;
@@ -2912,12 +2892,7 @@ namespace Database {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public int CustomerID {
                 get {
-                    try {
-                        return ((int)(this[this.tableBankInvestment.CustomerIDColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'CustomerID\' in table \'BankInvestment\' is DBNull.", e);
-                    }
+                    return ((int)(this[this.tableBankInvestment.CustomerIDColumn]));
                 }
                 set {
                     this[this.tableBankInvestment.CustomerIDColumn] = value;
@@ -2950,18 +2925,6 @@ namespace Database {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool IsBankDepositIDNull() {
-                return this.IsNull(this.tableBankInvestment.BankDepositIDColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void SetBankDepositIDNull() {
-                this[this.tableBankInvestment.BankDepositIDColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool IsTransactionSumNull() {
                 return this.IsNull(this.tableBankInvestment.TransactionSumColumn);
             }
@@ -2970,18 +2933,6 @@ namespace Database {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void SetTransactionSumNull() {
                 this[this.tableBankInvestment.TransactionSumColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool IsCustomerIDNull() {
-                return this.IsNull(this.tableBankInvestment.CustomerIDColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void SetCustomerIDNull() {
-                this[this.tableBankInvestment.CustomerIDColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -3167,12 +3118,7 @@ namespace Database {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public int SecuritiesID {
                 get {
-                    try {
-                        return ((int)(this[this.tablePaperInvestment.SecuritiesIDColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'SecuritiesID\' in table \'PaperInvestment\' is DBNull.", e);
-                    }
+                    return ((int)(this[this.tablePaperInvestment.SecuritiesIDColumn]));
                 }
                 set {
                     this[this.tablePaperInvestment.SecuritiesIDColumn] = value;
@@ -3199,12 +3145,7 @@ namespace Database {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public int CustomerID {
                 get {
-                    try {
-                        return ((int)(this[this.tablePaperInvestment.CustomerIDColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'CustomerID\' in table \'PaperInvestment\' is DBNull.", e);
-                    }
+                    return ((int)(this[this.tablePaperInvestment.CustomerIDColumn]));
                 }
                 set {
                     this[this.tablePaperInvestment.CustomerIDColumn] = value;
@@ -3237,18 +3178,6 @@ namespace Database {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool IsSecuritiesIDNull() {
-                return this.IsNull(this.tablePaperInvestment.SecuritiesIDColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void SetSecuritiesIDNull() {
-                this[this.tablePaperInvestment.SecuritiesIDColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool IsTransactionSumNull() {
                 return this.IsNull(this.tablePaperInvestment.TransactionSumColumn);
             }
@@ -3257,29 +3186,6 @@ namespace Database {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void SetTransactionSumNull() {
                 this[this.tablePaperInvestment.TransactionSumColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool IsCustomerIDNull() {
-                return this.IsNull(this.tablePaperInvestment.CustomerIDColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void SetCustomerIDNull() {
-                this[this.tablePaperInvestment.CustomerIDColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public QuotationRow[] GetQuotationRows() {
-                if ((this.Table.ChildRelations["FK__Quotation__Paper__59063A47"] == null)) {
-                    return new QuotationRow[0];
-                }
-                else {
-                    return ((QuotationRow[])(base.GetChildRows(this.Table.ChildRelations["FK__Quotation__Paper__59063A47"])));
-                }
             }
         }
         
@@ -3409,37 +3315,10 @@ namespace Database {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public int SecuritiesID {
                 get {
-                    try {
-                        return ((int)(this[this.tableQuotation.SecuritiesIDColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'SecuritiesID\' in table \'Quotation\' is DBNull.", e);
-                    }
+                    return ((int)(this[this.tableQuotation.SecuritiesIDColumn]));
                 }
                 set {
                     this[this.tableQuotation.SecuritiesIDColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public PaperInvestmentRow PaperInvestmentRow {
-                get {
-                    return ((PaperInvestmentRow)(this.GetParentRow(this.Table.ParentRelations["FK__Quotation__Paper__59063A47"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK__Quotation__Paper__59063A47"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public SecuritiesRow SecuritiesRow {
-                get {
-                    return ((SecuritiesRow)(this.GetParentRow(this.Table.ParentRelations["FK__Quotation__Secur__5812160E"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK__Quotation__Secur__5812160E"]);
                 }
             }
             
@@ -3465,18 +3344,6 @@ namespace Database {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void SetDateNull() {
                 this[this.tableQuotation.DateColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool IsSecuritiesIDNull() {
-                return this.IsNull(this.tableQuotation.SecuritiesIDColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void SetSecuritiesIDNull() {
-                this[this.tableQuotation.SecuritiesIDColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -3615,17 +3482,6 @@ namespace Database {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void SetAdditionalInformationNull() {
                 this[this.tableSecurities.AdditionalInformationColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public QuotationRow[] GetQuotationRows() {
-                if ((this.Table.ChildRelations["FK__Quotation__Secur__5812160E"] == null)) {
-                    return new QuotationRow[0];
-                }
-                else {
-                    return ((QuotationRow[])(base.GetChildRows(this.Table.ChildRelations["FK__Quotation__Secur__5812160E"])));
-                }
             }
         }
         
@@ -4038,7 +3894,7 @@ SELECT BankDepositID, MinimumDepositSum, PercentageIncomePerYear, TermDepositYea
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::Database.Properties.Settings.Default.dbomarkConnectionString;
+            this._connection.ConnectionString = global::Database.Properties.Settings.Default.markConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4394,18 +4250,16 @@ SELECT BankDepositID, MinimumDepositSum, PercentageIncomePerYear, TermDepositYea
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[BankInvestment] WHERE (([BankInvestmentID] = @Original_BankInvestmentID) AND ((@IsNull_DatePurchase = 1 AND [DatePurchase] IS NULL) OR ([DatePurchase] = @Original_DatePurchase)) AND ((@IsNull_DataSale = 1 AND [DataSale] IS NULL) OR ([DataSale] = @Original_DataSale)) AND ((@IsNull_BankDepositID = 1 AND [BankDepositID] IS NULL) OR ([BankDepositID] = @Original_BankDepositID)) AND ((@IsNull_TransactionSum = 1 AND [TransactionSum] IS NULL) OR ([TransactionSum] = @Original_TransactionSum)) AND ((@IsNull_CustomerID = 1 AND [CustomerID] IS NULL) OR ([CustomerID] = @Original_CustomerID)))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[BankInvestment] WHERE (([BankInvestmentID] = @Original_BankInvestmentID) AND ((@IsNull_DatePurchase = 1 AND [DatePurchase] IS NULL) OR ([DatePurchase] = @Original_DatePurchase)) AND ((@IsNull_DataSale = 1 AND [DataSale] IS NULL) OR ([DataSale] = @Original_DataSale)) AND ([BankDepositID] = @Original_BankDepositID) AND ((@IsNull_TransactionSum = 1 AND [TransactionSum] IS NULL) OR ([TransactionSum] = @Original_TransactionSum)) AND ([CustomerID] = @Original_CustomerID))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_BankInvestmentID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BankInvestmentID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_DatePurchase", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DatePurchase", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DatePurchase", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DatePurchase", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_DataSale", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DataSale", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DataSale", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DataSale", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_BankDepositID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BankDepositID", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_BankDepositID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BankDepositID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_TransactionSum", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TransactionSum", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TransactionSum", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 12, 2, "TransactionSum", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CustomerID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CustomerID", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CustomerID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CustomerID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
@@ -4419,7 +4273,7 @@ SELECT BankInvestmentID, DatePurchase, DataSale, BankDepositID, TransactionSum, 
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CustomerID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CustomerID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[BankInvestment] SET [DatePurchase] = @DatePurchase, [DataSale] = @DataSale, [BankDepositID] = @BankDepositID, [TransactionSum] = @TransactionSum, [CustomerID] = @CustomerID WHERE (([BankInvestmentID] = @Original_BankInvestmentID) AND ((@IsNull_DatePurchase = 1 AND [DatePurchase] IS NULL) OR ([DatePurchase] = @Original_DatePurchase)) AND ((@IsNull_DataSale = 1 AND [DataSale] IS NULL) OR ([DataSale] = @Original_DataSale)) AND ((@IsNull_BankDepositID = 1 AND [BankDepositID] IS NULL) OR ([BankDepositID] = @Original_BankDepositID)) AND ((@IsNull_TransactionSum = 1 AND [TransactionSum] IS NULL) OR ([TransactionSum] = @Original_TransactionSum)) AND ((@IsNull_CustomerID = 1 AND [CustomerID] IS NULL) OR ([CustomerID] = @Original_CustomerID)));
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[BankInvestment] SET [DatePurchase] = @DatePurchase, [DataSale] = @DataSale, [BankDepositID] = @BankDepositID, [TransactionSum] = @TransactionSum, [CustomerID] = @CustomerID WHERE (([BankInvestmentID] = @Original_BankInvestmentID) AND ((@IsNull_DatePurchase = 1 AND [DatePurchase] IS NULL) OR ([DatePurchase] = @Original_DatePurchase)) AND ((@IsNull_DataSale = 1 AND [DataSale] IS NULL) OR ([DataSale] = @Original_DataSale)) AND ([BankDepositID] = @Original_BankDepositID) AND ((@IsNull_TransactionSum = 1 AND [TransactionSum] IS NULL) OR ([TransactionSum] = @Original_TransactionSum)) AND ([CustomerID] = @Original_CustomerID));
 SELECT BankInvestmentID, DatePurchase, DataSale, BankDepositID, TransactionSum, CustomerID FROM BankInvestment WHERE (BankInvestmentID = @BankInvestmentID)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DatePurchase", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DatePurchase", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -4432,11 +4286,9 @@ SELECT BankInvestmentID, DatePurchase, DataSale, BankDepositID, TransactionSum, 
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DatePurchase", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DatePurchase", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_DataSale", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DataSale", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DataSale", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DataSale", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_BankDepositID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BankDepositID", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_BankDepositID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BankDepositID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_TransactionSum", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TransactionSum", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TransactionSum", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 12, 2, "TransactionSum", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CustomerID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CustomerID", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CustomerID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CustomerID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BankInvestmentID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "BankInvestmentID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
@@ -4445,7 +4297,7 @@ SELECT BankInvestmentID, DatePurchase, DataSale, BankDepositID, TransactionSum, 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::Database.Properties.Settings.Default.dbomarkConnectionString;
+            this._connection.ConnectionString = global::Database.Properties.Settings.Default.markConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4516,7 +4368,7 @@ SELECT BankInvestmentID, DatePurchase, DataSale, BankDepositID, TransactionSum, 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_BankInvestmentID, global::System.Nullable<global::System.DateTime> Original_DatePurchase, global::System.Nullable<global::System.DateTime> Original_DataSale, global::System.Nullable<int> Original_BankDepositID, global::System.Nullable<decimal> Original_TransactionSum, global::System.Nullable<int> Original_CustomerID) {
+        public virtual int Delete(int Original_BankInvestmentID, global::System.Nullable<global::System.DateTime> Original_DatePurchase, global::System.Nullable<global::System.DateTime> Original_DataSale, int Original_BankDepositID, global::System.Nullable<decimal> Original_TransactionSum, int Original_CustomerID) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_BankInvestmentID));
             if ((Original_DatePurchase.HasValue == true)) {
                 this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
@@ -4534,30 +4386,16 @@ SELECT BankInvestmentID, DatePurchase, DataSale, BankDepositID, TransactionSum, 
                 this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
             }
-            if ((Original_BankDepositID.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((int)(Original_BankDepositID.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
+            this.Adapter.DeleteCommand.Parameters[5].Value = ((int)(Original_BankDepositID));
             if ((Original_TransactionSum.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[8].Value = ((decimal)(Original_TransactionSum.Value));
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[7].Value = ((decimal)(Original_TransactionSum.Value));
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[8].Value = global::System.DBNull.Value;
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[7].Value = global::System.DBNull.Value;
             }
-            if ((Original_CustomerID.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[10].Value = ((int)(Original_CustomerID.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[10].Value = global::System.DBNull.Value;
-            }
+            this.Adapter.DeleteCommand.Parameters[8].Value = ((int)(Original_CustomerID));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -4578,7 +4416,7 @@ SELECT BankInvestmentID, DatePurchase, DataSale, BankDepositID, TransactionSum, 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(global::System.Nullable<global::System.DateTime> DatePurchase, global::System.Nullable<global::System.DateTime> DataSale, global::System.Nullable<int> BankDepositID, global::System.Nullable<decimal> TransactionSum, global::System.Nullable<int> CustomerID) {
+        public virtual int Insert(global::System.Nullable<global::System.DateTime> DatePurchase, global::System.Nullable<global::System.DateTime> DataSale, int BankDepositID, global::System.Nullable<decimal> TransactionSum, int CustomerID) {
             if ((DatePurchase.HasValue == true)) {
                 this.Adapter.InsertCommand.Parameters[0].Value = ((System.DateTime)(DatePurchase.Value));
             }
@@ -4591,24 +4429,14 @@ SELECT BankInvestmentID, DatePurchase, DataSale, BankDepositID, TransactionSum, 
             else {
                 this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
             }
-            if ((BankDepositID.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((int)(BankDepositID.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
+            this.Adapter.InsertCommand.Parameters[2].Value = ((int)(BankDepositID));
             if ((TransactionSum.HasValue == true)) {
                 this.Adapter.InsertCommand.Parameters[3].Value = ((decimal)(TransactionSum.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
             }
-            if ((CustomerID.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[4].Value = ((int)(CustomerID.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
+            this.Adapter.InsertCommand.Parameters[4].Value = ((int)(CustomerID));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -4629,7 +4457,7 @@ SELECT BankInvestmentID, DatePurchase, DataSale, BankDepositID, TransactionSum, 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(global::System.Nullable<global::System.DateTime> DatePurchase, global::System.Nullable<global::System.DateTime> DataSale, global::System.Nullable<int> BankDepositID, global::System.Nullable<decimal> TransactionSum, global::System.Nullable<int> CustomerID, int Original_BankInvestmentID, global::System.Nullable<global::System.DateTime> Original_DatePurchase, global::System.Nullable<global::System.DateTime> Original_DataSale, global::System.Nullable<int> Original_BankDepositID, global::System.Nullable<decimal> Original_TransactionSum, global::System.Nullable<int> Original_CustomerID, int BankInvestmentID) {
+        public virtual int Update(global::System.Nullable<global::System.DateTime> DatePurchase, global::System.Nullable<global::System.DateTime> DataSale, int BankDepositID, global::System.Nullable<decimal> TransactionSum, int CustomerID, int Original_BankInvestmentID, global::System.Nullable<global::System.DateTime> Original_DatePurchase, global::System.Nullable<global::System.DateTime> Original_DataSale, int Original_BankDepositID, global::System.Nullable<decimal> Original_TransactionSum, int Original_CustomerID, int BankInvestmentID) {
             if ((DatePurchase.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[0].Value = ((System.DateTime)(DatePurchase.Value));
             }
@@ -4642,24 +4470,14 @@ SELECT BankInvestmentID, DatePurchase, DataSale, BankDepositID, TransactionSum, 
             else {
                 this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
             }
-            if ((BankDepositID.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(BankDepositID.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
+            this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(BankDepositID));
             if ((TransactionSum.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[3].Value = ((decimal)(TransactionSum.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
             }
-            if ((CustomerID.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(CustomerID.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
+            this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(CustomerID));
             this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(Original_BankInvestmentID));
             if ((Original_DatePurchase.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(0));
@@ -4677,31 +4495,17 @@ SELECT BankInvestmentID, DatePurchase, DataSale, BankDepositID, TransactionSum, 
                 this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
             }
-            if ((Original_BankDepositID.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(Original_BankDepositID.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
-            }
+            this.Adapter.UpdateCommand.Parameters[10].Value = ((int)(Original_BankDepositID));
             if ((Original_TransactionSum.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((decimal)(Original_TransactionSum.Value));
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((decimal)(Original_TransactionSum.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[13].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[12].Value = global::System.DBNull.Value;
             }
-            if ((Original_CustomerID.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((int)(Original_CustomerID.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[15].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[16].Value = ((int)(BankInvestmentID));
+            this.Adapter.UpdateCommand.Parameters[13].Value = ((int)(Original_CustomerID));
+            this.Adapter.UpdateCommand.Parameters[14].Value = ((int)(BankInvestmentID));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -4722,7 +4526,7 @@ SELECT BankInvestmentID, DatePurchase, DataSale, BankDepositID, TransactionSum, 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(global::System.Nullable<global::System.DateTime> DatePurchase, global::System.Nullable<global::System.DateTime> DataSale, global::System.Nullable<int> BankDepositID, global::System.Nullable<decimal> TransactionSum, global::System.Nullable<int> CustomerID, int Original_BankInvestmentID, global::System.Nullable<global::System.DateTime> Original_DatePurchase, global::System.Nullable<global::System.DateTime> Original_DataSale, global::System.Nullable<int> Original_BankDepositID, global::System.Nullable<decimal> Original_TransactionSum, global::System.Nullable<int> Original_CustomerID) {
+        public virtual int Update(global::System.Nullable<global::System.DateTime> DatePurchase, global::System.Nullable<global::System.DateTime> DataSale, int BankDepositID, global::System.Nullable<decimal> TransactionSum, int CustomerID, int Original_BankInvestmentID, global::System.Nullable<global::System.DateTime> Original_DatePurchase, global::System.Nullable<global::System.DateTime> Original_DataSale, int Original_BankDepositID, global::System.Nullable<decimal> Original_TransactionSum, int Original_CustomerID) {
             return this.Update(DatePurchase, DataSale, BankDepositID, TransactionSum, CustomerID, Original_BankInvestmentID, Original_DatePurchase, Original_DataSale, Original_BankDepositID, Original_TransactionSum, Original_CustomerID, Original_BankInvestmentID);
         }
     }
@@ -4900,7 +4704,7 @@ SELECT CustomerID, Name, Adress, Phone, PropertyID FROM Customers WHERE (Custome
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::Database.Properties.Settings.Default.dbomarkConnectionString;
+            this._connection.ConnectionString = global::Database.Properties.Settings.Default.markConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5259,18 +5063,16 @@ SELECT CustomerID, Name, Adress, Phone, PropertyID FROM Customers WHERE (Custome
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[PaperInvestment] WHERE (([PaperInvestmentID] = @Original_PaperInvestmentID) AND ((@IsNull_DataPurchase = 1 AND [DataPurchase] IS NULL) OR ([DataPurchase] = @Original_DataPurchase)) AND ((@IsNull_DataSale = 1 AND [DataSale] IS NULL) OR ([DataSale] = @Original_DataSale)) AND ((@IsNull_SecuritiesID = 1 AND [SecuritiesID] IS NULL) OR ([SecuritiesID] = @Original_SecuritiesID)) AND ((@IsNull_TransactionSum = 1 AND [TransactionSum] IS NULL) OR ([TransactionSum] = @Original_TransactionSum)) AND ((@IsNull_CustomerID = 1 AND [CustomerID] IS NULL) OR ([CustomerID] = @Original_CustomerID)))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[PaperInvestment] WHERE (([PaperInvestmentID] = @Original_PaperInvestmentID) AND ((@IsNull_DataPurchase = 1 AND [DataPurchase] IS NULL) OR ([DataPurchase] = @Original_DataPurchase)) AND ((@IsNull_DataSale = 1 AND [DataSale] IS NULL) OR ([DataSale] = @Original_DataSale)) AND ([SecuritiesID] = @Original_SecuritiesID) AND ((@IsNull_TransactionSum = 1 AND [TransactionSum] IS NULL) OR ([TransactionSum] = @Original_TransactionSum)) AND ([CustomerID] = @Original_CustomerID))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PaperInvestmentID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PaperInvestmentID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_DataPurchase", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DataPurchase", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DataPurchase", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DataPurchase", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_DataSale", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DataSale", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DataSale", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DataSale", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_SecuritiesID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SecuritiesID", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SecuritiesID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SecuritiesID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_TransactionSum", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TransactionSum", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TransactionSum", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 12, 2, "TransactionSum", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CustomerID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CustomerID", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CustomerID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CustomerID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
@@ -5284,7 +5086,7 @@ SELECT PaperInvestmentID, DataPurchase, DataSale, SecuritiesID, TransactionSum, 
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CustomerID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CustomerID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[PaperInvestment] SET [DataPurchase] = @DataPurchase, [DataSale] = @DataSale, [SecuritiesID] = @SecuritiesID, [TransactionSum] = @TransactionSum, [CustomerID] = @CustomerID WHERE (([PaperInvestmentID] = @Original_PaperInvestmentID) AND ((@IsNull_DataPurchase = 1 AND [DataPurchase] IS NULL) OR ([DataPurchase] = @Original_DataPurchase)) AND ((@IsNull_DataSale = 1 AND [DataSale] IS NULL) OR ([DataSale] = @Original_DataSale)) AND ((@IsNull_SecuritiesID = 1 AND [SecuritiesID] IS NULL) OR ([SecuritiesID] = @Original_SecuritiesID)) AND ((@IsNull_TransactionSum = 1 AND [TransactionSum] IS NULL) OR ([TransactionSum] = @Original_TransactionSum)) AND ((@IsNull_CustomerID = 1 AND [CustomerID] IS NULL) OR ([CustomerID] = @Original_CustomerID)));
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[PaperInvestment] SET [DataPurchase] = @DataPurchase, [DataSale] = @DataSale, [SecuritiesID] = @SecuritiesID, [TransactionSum] = @TransactionSum, [CustomerID] = @CustomerID WHERE (([PaperInvestmentID] = @Original_PaperInvestmentID) AND ((@IsNull_DataPurchase = 1 AND [DataPurchase] IS NULL) OR ([DataPurchase] = @Original_DataPurchase)) AND ((@IsNull_DataSale = 1 AND [DataSale] IS NULL) OR ([DataSale] = @Original_DataSale)) AND ([SecuritiesID] = @Original_SecuritiesID) AND ((@IsNull_TransactionSum = 1 AND [TransactionSum] IS NULL) OR ([TransactionSum] = @Original_TransactionSum)) AND ([CustomerID] = @Original_CustomerID));
 SELECT PaperInvestmentID, DataPurchase, DataSale, SecuritiesID, TransactionSum, CustomerID FROM PaperInvestment WHERE (PaperInvestmentID = @PaperInvestmentID)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DataPurchase", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DataPurchase", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -5297,11 +5099,9 @@ SELECT PaperInvestmentID, DataPurchase, DataSale, SecuritiesID, TransactionSum, 
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DataPurchase", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DataPurchase", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_DataSale", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DataSale", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DataSale", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DataSale", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_SecuritiesID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SecuritiesID", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SecuritiesID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SecuritiesID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_TransactionSum", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TransactionSum", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_TransactionSum", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 12, 2, "TransactionSum", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CustomerID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CustomerID", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CustomerID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CustomerID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PaperInvestmentID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "PaperInvestmentID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
@@ -5310,7 +5110,7 @@ SELECT PaperInvestmentID, DataPurchase, DataSale, SecuritiesID, TransactionSum, 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::Database.Properties.Settings.Default.dbomarkConnectionString;
+            this._connection.ConnectionString = global::Database.Properties.Settings.Default.markConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5381,7 +5181,7 @@ SELECT PaperInvestmentID, DataPurchase, DataSale, SecuritiesID, TransactionSum, 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_PaperInvestmentID, global::System.Nullable<global::System.DateTime> Original_DataPurchase, global::System.Nullable<global::System.DateTime> Original_DataSale, global::System.Nullable<int> Original_SecuritiesID, global::System.Nullable<decimal> Original_TransactionSum, global::System.Nullable<int> Original_CustomerID) {
+        public virtual int Delete(int Original_PaperInvestmentID, global::System.Nullable<global::System.DateTime> Original_DataPurchase, global::System.Nullable<global::System.DateTime> Original_DataSale, int Original_SecuritiesID, global::System.Nullable<decimal> Original_TransactionSum, int Original_CustomerID) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_PaperInvestmentID));
             if ((Original_DataPurchase.HasValue == true)) {
                 this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
@@ -5399,30 +5199,16 @@ SELECT PaperInvestmentID, DataPurchase, DataSale, SecuritiesID, TransactionSum, 
                 this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
             }
-            if ((Original_SecuritiesID.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((int)(Original_SecuritiesID.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
+            this.Adapter.DeleteCommand.Parameters[5].Value = ((int)(Original_SecuritiesID));
             if ((Original_TransactionSum.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[8].Value = ((decimal)(Original_TransactionSum.Value));
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[7].Value = ((decimal)(Original_TransactionSum.Value));
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[8].Value = global::System.DBNull.Value;
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[7].Value = global::System.DBNull.Value;
             }
-            if ((Original_CustomerID.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[10].Value = ((int)(Original_CustomerID.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[10].Value = global::System.DBNull.Value;
-            }
+            this.Adapter.DeleteCommand.Parameters[8].Value = ((int)(Original_CustomerID));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -5443,7 +5229,7 @@ SELECT PaperInvestmentID, DataPurchase, DataSale, SecuritiesID, TransactionSum, 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(global::System.Nullable<global::System.DateTime> DataPurchase, global::System.Nullable<global::System.DateTime> DataSale, global::System.Nullable<int> SecuritiesID, global::System.Nullable<decimal> TransactionSum, global::System.Nullable<int> CustomerID) {
+        public virtual int Insert(global::System.Nullable<global::System.DateTime> DataPurchase, global::System.Nullable<global::System.DateTime> DataSale, int SecuritiesID, global::System.Nullable<decimal> TransactionSum, int CustomerID) {
             if ((DataPurchase.HasValue == true)) {
                 this.Adapter.InsertCommand.Parameters[0].Value = ((System.DateTime)(DataPurchase.Value));
             }
@@ -5456,24 +5242,14 @@ SELECT PaperInvestmentID, DataPurchase, DataSale, SecuritiesID, TransactionSum, 
             else {
                 this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
             }
-            if ((SecuritiesID.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((int)(SecuritiesID.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
+            this.Adapter.InsertCommand.Parameters[2].Value = ((int)(SecuritiesID));
             if ((TransactionSum.HasValue == true)) {
                 this.Adapter.InsertCommand.Parameters[3].Value = ((decimal)(TransactionSum.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
             }
-            if ((CustomerID.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[4].Value = ((int)(CustomerID.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
+            this.Adapter.InsertCommand.Parameters[4].Value = ((int)(CustomerID));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -5494,7 +5270,7 @@ SELECT PaperInvestmentID, DataPurchase, DataSale, SecuritiesID, TransactionSum, 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(global::System.Nullable<global::System.DateTime> DataPurchase, global::System.Nullable<global::System.DateTime> DataSale, global::System.Nullable<int> SecuritiesID, global::System.Nullable<decimal> TransactionSum, global::System.Nullable<int> CustomerID, int Original_PaperInvestmentID, global::System.Nullable<global::System.DateTime> Original_DataPurchase, global::System.Nullable<global::System.DateTime> Original_DataSale, global::System.Nullable<int> Original_SecuritiesID, global::System.Nullable<decimal> Original_TransactionSum, global::System.Nullable<int> Original_CustomerID, int PaperInvestmentID) {
+        public virtual int Update(global::System.Nullable<global::System.DateTime> DataPurchase, global::System.Nullable<global::System.DateTime> DataSale, int SecuritiesID, global::System.Nullable<decimal> TransactionSum, int CustomerID, int Original_PaperInvestmentID, global::System.Nullable<global::System.DateTime> Original_DataPurchase, global::System.Nullable<global::System.DateTime> Original_DataSale, int Original_SecuritiesID, global::System.Nullable<decimal> Original_TransactionSum, int Original_CustomerID, int PaperInvestmentID) {
             if ((DataPurchase.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[0].Value = ((System.DateTime)(DataPurchase.Value));
             }
@@ -5507,24 +5283,14 @@ SELECT PaperInvestmentID, DataPurchase, DataSale, SecuritiesID, TransactionSum, 
             else {
                 this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
             }
-            if ((SecuritiesID.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(SecuritiesID.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
+            this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(SecuritiesID));
             if ((TransactionSum.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[3].Value = ((decimal)(TransactionSum.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
             }
-            if ((CustomerID.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(CustomerID.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
+            this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(CustomerID));
             this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(Original_PaperInvestmentID));
             if ((Original_DataPurchase.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(0));
@@ -5542,31 +5308,17 @@ SELECT PaperInvestmentID, DataPurchase, DataSale, SecuritiesID, TransactionSum, 
                 this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
             }
-            if ((Original_SecuritiesID.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(Original_SecuritiesID.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
-            }
+            this.Adapter.UpdateCommand.Parameters[10].Value = ((int)(Original_SecuritiesID));
             if ((Original_TransactionSum.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((decimal)(Original_TransactionSum.Value));
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((decimal)(Original_TransactionSum.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[13].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[12].Value = global::System.DBNull.Value;
             }
-            if ((Original_CustomerID.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((int)(Original_CustomerID.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[15].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[16].Value = ((int)(PaperInvestmentID));
+            this.Adapter.UpdateCommand.Parameters[13].Value = ((int)(Original_CustomerID));
+            this.Adapter.UpdateCommand.Parameters[14].Value = ((int)(PaperInvestmentID));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -5587,7 +5339,7 @@ SELECT PaperInvestmentID, DataPurchase, DataSale, SecuritiesID, TransactionSum, 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(global::System.Nullable<global::System.DateTime> DataPurchase, global::System.Nullable<global::System.DateTime> DataSale, global::System.Nullable<int> SecuritiesID, global::System.Nullable<decimal> TransactionSum, global::System.Nullable<int> CustomerID, int Original_PaperInvestmentID, global::System.Nullable<global::System.DateTime> Original_DataPurchase, global::System.Nullable<global::System.DateTime> Original_DataSale, global::System.Nullable<int> Original_SecuritiesID, global::System.Nullable<decimal> Original_TransactionSum, global::System.Nullable<int> Original_CustomerID) {
+        public virtual int Update(global::System.Nullable<global::System.DateTime> DataPurchase, global::System.Nullable<global::System.DateTime> DataSale, int SecuritiesID, global::System.Nullable<decimal> TransactionSum, int CustomerID, int Original_PaperInvestmentID, global::System.Nullable<global::System.DateTime> Original_DataPurchase, global::System.Nullable<global::System.DateTime> Original_DataSale, int Original_SecuritiesID, global::System.Nullable<decimal> Original_TransactionSum, int Original_CustomerID) {
             return this.Update(DataPurchase, DataSale, SecuritiesID, TransactionSum, CustomerID, Original_PaperInvestmentID, Original_DataPurchase, Original_DataSale, Original_SecuritiesID, Original_TransactionSum, Original_CustomerID, Original_PaperInvestmentID);
         }
     }
@@ -5748,7 +5500,7 @@ SELECT PaperInvestmentID, DataPurchase, DataSale, SecuritiesID, TransactionSum, 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::Database.Properties.Settings.Default.dbomarkConnectionString;
+            this._connection.ConnectionString = global::Database.Properties.Settings.Default.markConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6046,7 +5798,7 @@ SELECT PaperInvestmentID, DataPurchase, DataSale, SecuritiesID, TransactionSum, 
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[Quotation] WHERE (([QuotationID] = @Original_QuotationID) AND ([PaperInvestmentID] = @Original_PaperInvestmentID) AND ((@IsNull_Price = 1 AND [Price] IS NULL) OR ([Price] = @Original_Price)) AND ((@IsNull_Date = 1 AND [Date] IS NULL) OR ([Date] = @Original_Date)) AND ((@IsNull_SecuritiesID = 1 AND [SecuritiesID] IS NULL) OR ([SecuritiesID] = @Original_SecuritiesID)))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[Quotation] WHERE (([QuotationID] = @Original_QuotationID) AND ([PaperInvestmentID] = @Original_PaperInvestmentID) AND ((@IsNull_Price = 1 AND [Price] IS NULL) OR ([Price] = @Original_Price)) AND ((@IsNull_Date = 1 AND [Date] IS NULL) OR ([Date] = @Original_Date)) AND ([SecuritiesID] = @Original_SecuritiesID))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_QuotationID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "QuotationID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_PaperInvestmentID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PaperInvestmentID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -6054,7 +5806,6 @@ SELECT PaperInvestmentID, DataPurchase, DataSale, SecuritiesID, TransactionSum, 
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Price", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 12, 2, "Price", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Date", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Date", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Date", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Date", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_SecuritiesID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SecuritiesID", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SecuritiesID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SecuritiesID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
@@ -6067,7 +5818,7 @@ SELECT QuotationID, PaperInvestmentID, Price, Date, SecuritiesID FROM Quotation 
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SecuritiesID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SecuritiesID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[Quotation] SET [PaperInvestmentID] = @PaperInvestmentID, [Price] = @Price, [Date] = @Date, [SecuritiesID] = @SecuritiesID WHERE (([QuotationID] = @Original_QuotationID) AND ([PaperInvestmentID] = @Original_PaperInvestmentID) AND ((@IsNull_Price = 1 AND [Price] IS NULL) OR ([Price] = @Original_Price)) AND ((@IsNull_Date = 1 AND [Date] IS NULL) OR ([Date] = @Original_Date)) AND ((@IsNull_SecuritiesID = 1 AND [SecuritiesID] IS NULL) OR ([SecuritiesID] = @Original_SecuritiesID)));
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[Quotation] SET [PaperInvestmentID] = @PaperInvestmentID, [Price] = @Price, [Date] = @Date, [SecuritiesID] = @SecuritiesID WHERE (([QuotationID] = @Original_QuotationID) AND ([PaperInvestmentID] = @Original_PaperInvestmentID) AND ((@IsNull_Price = 1 AND [Price] IS NULL) OR ([Price] = @Original_Price)) AND ((@IsNull_Date = 1 AND [Date] IS NULL) OR ([Date] = @Original_Date)) AND ([SecuritiesID] = @Original_SecuritiesID));
 SELECT QuotationID, PaperInvestmentID, Price, Date, SecuritiesID FROM Quotation WHERE (PaperInvestmentID = @PaperInvestmentID) AND (QuotationID = @QuotationID)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PaperInvestmentID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "PaperInvestmentID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -6080,7 +5831,6 @@ SELECT QuotationID, PaperInvestmentID, Price, Date, SecuritiesID FROM Quotation 
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Price", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 12, 2, "Price", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Date", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Date", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Date", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Date", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_SecuritiesID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SecuritiesID", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SecuritiesID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "SecuritiesID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@QuotationID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "QuotationID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
@@ -6089,7 +5839,7 @@ SELECT QuotationID, PaperInvestmentID, Price, Date, SecuritiesID FROM Quotation 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::Database.Properties.Settings.Default.dbomarkConnectionString;
+            this._connection.ConnectionString = global::Database.Properties.Settings.Default.markConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6160,7 +5910,7 @@ SELECT QuotationID, PaperInvestmentID, Price, Date, SecuritiesID FROM Quotation 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_QuotationID, int Original_PaperInvestmentID, global::System.Nullable<decimal> Original_Price, global::System.Nullable<global::System.DateTime> Original_Date, global::System.Nullable<int> Original_SecuritiesID) {
+        public virtual int Delete(int Original_QuotationID, int Original_PaperInvestmentID, global::System.Nullable<decimal> Original_Price, global::System.Nullable<global::System.DateTime> Original_Date, int Original_SecuritiesID) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_QuotationID));
             this.Adapter.DeleteCommand.Parameters[1].Value = ((int)(Original_PaperInvestmentID));
             if ((Original_Price.HasValue == true)) {
@@ -6179,14 +5929,7 @@ SELECT QuotationID, PaperInvestmentID, Price, Date, SecuritiesID FROM Quotation 
                 this.Adapter.DeleteCommand.Parameters[4].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[5].Value = global::System.DBNull.Value;
             }
-            if ((Original_SecuritiesID.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[7].Value = ((int)(Original_SecuritiesID.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[7].Value = global::System.DBNull.Value;
-            }
+            this.Adapter.DeleteCommand.Parameters[6].Value = ((int)(Original_SecuritiesID));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -6207,7 +5950,7 @@ SELECT QuotationID, PaperInvestmentID, Price, Date, SecuritiesID FROM Quotation 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(int PaperInvestmentID, global::System.Nullable<decimal> Price, global::System.Nullable<global::System.DateTime> Date, global::System.Nullable<int> SecuritiesID) {
+        public virtual int Insert(int PaperInvestmentID, global::System.Nullable<decimal> Price, global::System.Nullable<global::System.DateTime> Date, int SecuritiesID) {
             this.Adapter.InsertCommand.Parameters[0].Value = ((int)(PaperInvestmentID));
             if ((Price.HasValue == true)) {
                 this.Adapter.InsertCommand.Parameters[1].Value = ((decimal)(Price.Value));
@@ -6221,12 +5964,7 @@ SELECT QuotationID, PaperInvestmentID, Price, Date, SecuritiesID FROM Quotation 
             else {
                 this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
             }
-            if ((SecuritiesID.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[3].Value = ((int)(SecuritiesID.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
+            this.Adapter.InsertCommand.Parameters[3].Value = ((int)(SecuritiesID));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -6247,7 +5985,7 @@ SELECT QuotationID, PaperInvestmentID, Price, Date, SecuritiesID FROM Quotation 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int PaperInvestmentID, global::System.Nullable<decimal> Price, global::System.Nullable<global::System.DateTime> Date, global::System.Nullable<int> SecuritiesID, int Original_QuotationID, int Original_PaperInvestmentID, global::System.Nullable<decimal> Original_Price, global::System.Nullable<global::System.DateTime> Original_Date, global::System.Nullable<int> Original_SecuritiesID, int QuotationID) {
+        public virtual int Update(int PaperInvestmentID, global::System.Nullable<decimal> Price, global::System.Nullable<global::System.DateTime> Date, int SecuritiesID, int Original_QuotationID, int Original_PaperInvestmentID, global::System.Nullable<decimal> Original_Price, global::System.Nullable<global::System.DateTime> Original_Date, int Original_SecuritiesID, int QuotationID) {
             this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(PaperInvestmentID));
             if ((Price.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[1].Value = ((decimal)(Price.Value));
@@ -6261,12 +5999,7 @@ SELECT QuotationID, PaperInvestmentID, Price, Date, SecuritiesID FROM Quotation 
             else {
                 this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
             }
-            if ((SecuritiesID.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(SecuritiesID.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
+            this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(SecuritiesID));
             this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(Original_QuotationID));
             this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(Original_PaperInvestmentID));
             if ((Original_Price.HasValue == true)) {
@@ -6285,15 +6018,8 @@ SELECT QuotationID, PaperInvestmentID, Price, Date, SecuritiesID FROM Quotation 
                 this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
             }
-            if ((Original_SecuritiesID.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(Original_SecuritiesID.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[12].Value = ((int)(QuotationID));
+            this.Adapter.UpdateCommand.Parameters[10].Value = ((int)(Original_SecuritiesID));
+            this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(QuotationID));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -6314,7 +6040,7 @@ SELECT QuotationID, PaperInvestmentID, Price, Date, SecuritiesID FROM Quotation 
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(global::System.Nullable<decimal> Price, global::System.Nullable<global::System.DateTime> Date, global::System.Nullable<int> SecuritiesID, int Original_QuotationID, int Original_PaperInvestmentID, global::System.Nullable<decimal> Original_Price, global::System.Nullable<global::System.DateTime> Original_Date, global::System.Nullable<int> Original_SecuritiesID) {
+        public virtual int Update(global::System.Nullable<decimal> Price, global::System.Nullable<global::System.DateTime> Date, int SecuritiesID, int Original_QuotationID, int Original_PaperInvestmentID, global::System.Nullable<decimal> Original_Price, global::System.Nullable<global::System.DateTime> Original_Date, int Original_SecuritiesID) {
             return this.Update(Original_PaperInvestmentID, Price, Date, SecuritiesID, Original_QuotationID, Original_PaperInvestmentID, Original_Price, Original_Date, Original_SecuritiesID, Original_QuotationID);
         }
     }
@@ -6493,7 +6219,7 @@ SELECT SecuritiesID, MinimumDepositSum, Rating, YieldForLastYear, AdditionalInfo
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::Database.Properties.Settings.Default.dbomarkConnectionString;
+            this._connection.ConnectionString = global::Database.Properties.Settings.Default.markConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6748,106 +6474,6 @@ SELECT SecuritiesID, MinimumDepositSum, Rating, YieldForLastYear, AdditionalInfo
     }
     
     /// <summary>
-    ///Represents the connection and commands used to retrieve and save data.
-    ///</summary>
-    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
-    [global::System.ComponentModel.ToolboxItem(true)]
-    [global::System.ComponentModel.DataObjectAttribute(true)]
-    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
-        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
-    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class QueriesTableAdapter : global::System.ComponentModel.Component {
-        
-        private global::System.Data.IDbCommand[] _commandCollection;
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-        protected global::System.Data.IDbCommand[] CommandCollection {
-            get {
-                if ((this._commandCollection == null)) {
-                    this.InitCommandCollection();
-                }
-                return this._commandCollection;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-        private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.IDbCommand[1];
-            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
-            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[0])).Connection = new global::System.Data.SqlClient.SqlConnection(global::Database.Properties.Settings.Default.dbomarkConnectionString);
-            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[0])).CommandText = "dbo.AddInvestment";
-            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[0])).CommandType = global::System.Data.CommandType.StoredProcedure;
-            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[0])).Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RETURN_VALUE", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.ReturnValue, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[0])).Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DatePurchase", global::System.Data.SqlDbType.DateTime, 8, global::System.Data.ParameterDirection.Input, 23, 3, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[0])).Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DataSale", global::System.Data.SqlDbType.DateTime, 8, global::System.Data.ParameterDirection.Input, 23, 3, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[0])).Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TransactionSum", global::System.Data.SqlDbType.Decimal, 9, global::System.Data.ParameterDirection.Input, 12, 2, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[0])).Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CustomerID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[0])).Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@InvestID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[0])).Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CustomerChoose", global::System.Data.SqlDbType.VarChar, 25, global::System.Data.ParameterDirection.Input, 0, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int AddInvestment(global::System.Nullable<global::System.DateTime> DatePurchase, global::System.Nullable<global::System.DateTime> DataSale, global::System.Nullable<decimal> TransactionSum, global::System.Nullable<int> CustomerID, global::System.Nullable<int> InvestID, string CustomerChoose) {
-            global::System.Data.SqlClient.SqlCommand command = ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[0]));
-            if ((DatePurchase.HasValue == true)) {
-                command.Parameters[1].Value = ((System.DateTime)(DatePurchase.Value));
-            }
-            else {
-                command.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            if ((DataSale.HasValue == true)) {
-                command.Parameters[2].Value = ((System.DateTime)(DataSale.Value));
-            }
-            else {
-                command.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            if ((TransactionSum.HasValue == true)) {
-                command.Parameters[3].Value = ((decimal)(TransactionSum.Value));
-            }
-            else {
-                command.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            if ((CustomerID.HasValue == true)) {
-                command.Parameters[4].Value = ((int)(CustomerID.Value));
-            }
-            else {
-                command.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            if ((InvestID.HasValue == true)) {
-                command.Parameters[5].Value = ((int)(InvestID.Value));
-            }
-            else {
-                command.Parameters[5].Value = global::System.DBNull.Value;
-            }
-            if ((CustomerChoose == null)) {
-                command.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            else {
-                command.Parameters[6].Value = ((string)(CustomerChoose));
-            }
-            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
-            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                command.Connection.Open();
-            }
-            int returnValue;
-            try {
-                returnValue = command.ExecuteNonQuery();
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    command.Connection.Close();
-                }
-            }
-            return returnValue;
-        }
-    }
-    
-    /// <summary>
     ///TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
     ///</summary>
     [global::System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -7078,24 +6704,6 @@ SELECT SecuritiesID, MinimumDepositSum, Rating, YieldForLastYear, AdditionalInfo
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private int UpdateUpdatedRows(DataSet1 dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
-            if ((this._paperInvestmentTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.PaperInvestment.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._paperInvestmentTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._securitiesTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Securities.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._securitiesTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
             if ((this._bankDepositsTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.BankDeposits.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
@@ -7123,6 +6731,15 @@ SELECT SecuritiesID, MinimumDepositSum, Rating, YieldForLastYear, AdditionalInfo
                     allChangedRows.AddRange(updatedRows);
                 }
             }
+            if ((this._paperInvestmentTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.PaperInvestment.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._paperInvestmentTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
             if ((this._propertyTypeTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.PropertyType.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
@@ -7141,6 +6758,15 @@ SELECT SecuritiesID, MinimumDepositSum, Rating, YieldForLastYear, AdditionalInfo
                     allChangedRows.AddRange(updatedRows);
                 }
             }
+            if ((this._securitiesTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Securities.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._securitiesTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
             return result;
         }
         
@@ -7151,22 +6777,6 @@ SELECT SecuritiesID, MinimumDepositSum, Rating, YieldForLastYear, AdditionalInfo
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private int UpdateInsertedRows(DataSet1 dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
-            if ((this._paperInvestmentTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.PaperInvestment.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._paperInvestmentTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._securitiesTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Securities.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._securitiesTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
             if ((this._bankDepositsTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.BankDeposits.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
@@ -7191,6 +6801,14 @@ SELECT SecuritiesID, MinimumDepositSum, Rating, YieldForLastYear, AdditionalInfo
                     allAddedRows.AddRange(addedRows);
                 }
             }
+            if ((this._paperInvestmentTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.PaperInvestment.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._paperInvestmentTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
             if ((this._propertyTypeTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.PropertyType.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
@@ -7207,6 +6825,14 @@ SELECT SecuritiesID, MinimumDepositSum, Rating, YieldForLastYear, AdditionalInfo
                     allAddedRows.AddRange(addedRows);
                 }
             }
+            if ((this._securitiesTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Securities.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._securitiesTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
             return result;
         }
         
@@ -7217,6 +6843,14 @@ SELECT SecuritiesID, MinimumDepositSum, Rating, YieldForLastYear, AdditionalInfo
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private int UpdateDeletedRows(DataSet1 dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
+            if ((this._securitiesTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Securities.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._securitiesTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
             if ((this._quotationTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.Quotation.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
@@ -7230,6 +6864,14 @@ SELECT SecuritiesID, MinimumDepositSum, Rating, YieldForLastYear, AdditionalInfo
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._propertyTypeTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._paperInvestmentTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.PaperInvestment.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._paperInvestmentTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -7254,22 +6896,6 @@ SELECT SecuritiesID, MinimumDepositSum, Rating, YieldForLastYear, AdditionalInfo
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._bankDepositsTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._securitiesTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Securities.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._securitiesTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._paperInvestmentTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.PaperInvestment.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._paperInvestmentTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }

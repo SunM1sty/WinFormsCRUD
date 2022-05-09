@@ -152,7 +152,6 @@
             this.bankDepositsBindingNavigator.Size = new System.Drawing.Size(850, 25);
             this.bankDepositsBindingNavigator.TabIndex = 0;
             this.bankDepositsBindingNavigator.Text = "bindingNavigator1";
-            this.bankDepositsBindingNavigator.RefreshItems += new System.EventHandler(this.bankDepositsBindingNavigator_RefreshItems);
             // 
             // bindingNavigatorAddNewItem
             // 
