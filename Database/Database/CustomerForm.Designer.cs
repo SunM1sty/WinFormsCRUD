@@ -152,7 +152,7 @@
             this.customersBindingNavigator.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.customersBindingNavigator.Name = "customersBindingNavigator";
             this.customersBindingNavigator.PositionItem = this.bindingNavigatorPositionItem;
-            this.customersBindingNavigator.Size = new System.Drawing.Size(1040, 25);
+            this.customersBindingNavigator.Size = new System.Drawing.Size(1181, 25);
             this.customersBindingNavigator.TabIndex = 0;
             this.customersBindingNavigator.Text = "bindingNavigator1";
             // 
@@ -220,7 +220,6 @@
             // 
             this.bindingNavigatorPositionItem.AccessibleName = "Position";
             this.bindingNavigatorPositionItem.AutoSize = false;
-            this.bindingNavigatorPositionItem.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
             this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 23);
             this.bindingNavigatorPositionItem.Text = "0";
@@ -263,7 +262,7 @@
             this.customersBindingNavigatorSaveItem.Name = "customersBindingNavigatorSaveItem";
             this.customersBindingNavigatorSaveItem.Size = new System.Drawing.Size(23, 22);
             this.customersBindingNavigatorSaveItem.Text = "Save Data";
-            this.customersBindingNavigatorSaveItem.Click += new System.EventHandler(this.bindingNavigator);
+            this.customersBindingNavigatorSaveItem.Click += new System.EventHandler(this.CustomerBindingNavigatorSaveItem_Click);
             // 
             // customersDataGridView
             // 
@@ -371,7 +370,7 @@
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(745, 127);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(210, 21);
+            this.comboBox1.Size = new System.Drawing.Size(290, 21);
             this.comboBox1.TabIndex = 16;
             // 
             // btnUpdate
@@ -416,7 +415,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1040, 439);
+            this.ClientSize = new System.Drawing.Size(1181, 439);
             this.Controls.Add(customerIDLabel);
             this.Controls.Add(this.customerIDTextBox);
             this.Controls.Add(this.btnUpdate);

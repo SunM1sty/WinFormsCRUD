@@ -114,6 +114,18 @@ namespace Database
                     }
                     _reader.Close();
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                this.customersTableAdapter.Fill(this.dataSet1.Customers);
+            }
+        }
+
+        private void CustomerBindingNavigatorSaveItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
                 this.Validate();
                 customersBindingSource.EndEdit();
                 this.tableAdapterManager.UpdateAll(this.dataSet1);

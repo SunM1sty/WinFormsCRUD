@@ -63,6 +63,10 @@
             this.securitiesIDTextBox = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.quotationIDTextBox = new System.Windows.Forms.TextBox();
+            this.btnUpdate = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
             paperInvestmentIDLabel = new System.Windows.Forms.Label();
             priceLabel = new System.Windows.Forms.Label();
             dateLabel = new System.Windows.Forms.Label();
@@ -77,7 +81,7 @@
             // paperInvestmentIDLabel
             // 
             paperInvestmentIDLabel.AutoSize = true;
-            paperInvestmentIDLabel.Location = new System.Drawing.Point(573, 54);
+            paperInvestmentIDLabel.Location = new System.Drawing.Point(573, 49);
             paperInvestmentIDLabel.Name = "paperInvestmentIDLabel";
             paperInvestmentIDLabel.Size = new System.Drawing.Size(107, 13);
             paperInvestmentIDLabel.TabIndex = 4;
@@ -95,7 +99,7 @@
             // dateLabel
             // 
             dateLabel.AutoSize = true;
-            dateLabel.Location = new System.Drawing.Point(573, 107);
+            dateLabel.Location = new System.Drawing.Point(574, 109);
             dateLabel.Name = "dateLabel";
             dateLabel.Size = new System.Drawing.Size(33, 13);
             dateLabel.TabIndex = 8;
@@ -104,7 +108,7 @@
             // securitiesIDLabel
             // 
             securitiesIDLabel.AutoSize = true;
-            securitiesIDLabel.Location = new System.Drawing.Point(573, 132);
+            securitiesIDLabel.Location = new System.Drawing.Point(573, 135);
             securitiesIDLabel.Name = "securitiesIDLabel";
             securitiesIDLabel.Size = new System.Drawing.Size(70, 13);
             securitiesIDLabel.TabIndex = 10;
@@ -162,7 +166,7 @@
             this.quotationBindingNavigator.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.quotationBindingNavigator.Name = "quotationBindingNavigator";
             this.quotationBindingNavigator.PositionItem = this.bindingNavigatorPositionItem;
-            this.quotationBindingNavigator.Size = new System.Drawing.Size(941, 25);
+            this.quotationBindingNavigator.Size = new System.Drawing.Size(1377, 25);
             this.quotationBindingNavigator.TabIndex = 0;
             this.quotationBindingNavigator.Text = "bindingNavigator1";
             // 
@@ -199,6 +203,7 @@
             this.bindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true;
             this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(23, 22);
             this.bindingNavigatorMoveFirstItem.Text = "Move first";
+            this.bindingNavigatorMoveFirstItem.Click += new System.EventHandler(this.bindingNavigator);
             // 
             // bindingNavigatorMovePreviousItem
             // 
@@ -208,6 +213,7 @@
             this.bindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = true;
             this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(23, 22);
             this.bindingNavigatorMovePreviousItem.Text = "Move previous";
+            this.bindingNavigatorMovePreviousItem.Click += new System.EventHandler(this.bindingNavigator);
             // 
             // bindingNavigatorSeparator
             // 
@@ -236,6 +242,7 @@
             this.bindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = true;
             this.bindingNavigatorMoveNextItem.Size = new System.Drawing.Size(23, 22);
             this.bindingNavigatorMoveNextItem.Text = "Move next";
+            this.bindingNavigatorMoveNextItem.Click += new System.EventHandler(this.bindingNavigator);
             // 
             // bindingNavigatorMoveLastItem
             // 
@@ -245,6 +252,7 @@
             this.bindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = true;
             this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(23, 22);
             this.bindingNavigatorMoveLastItem.Text = "Move last";
+            this.bindingNavigatorMoveLastItem.Click += new System.EventHandler(this.bindingNavigator);
             // 
             // bindingNavigatorSeparator2
             // 
@@ -310,15 +318,15 @@
             // paperInvestmentIDTextBox
             // 
             this.paperInvestmentIDTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.quotationBindingSource, "PaperInvestmentID", true));
-            this.paperInvestmentIDTextBox.Location = new System.Drawing.Point(686, 51);
+            this.paperInvestmentIDTextBox.Location = new System.Drawing.Point(469, 524);
             this.paperInvestmentIDTextBox.Name = "paperInvestmentIDTextBox";
-            this.paperInvestmentIDTextBox.Size = new System.Drawing.Size(141, 20);
+            this.paperInvestmentIDTextBox.Size = new System.Drawing.Size(75, 20);
             this.paperInvestmentIDTextBox.TabIndex = 5;
             // 
             // priceTextBox
             // 
             this.priceTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.quotationBindingSource, "Price", true));
-            this.priceTextBox.Location = new System.Drawing.Point(686, 77);
+            this.priceTextBox.Location = new System.Drawing.Point(695, 77);
             this.priceTextBox.Name = "priceTextBox";
             this.priceTextBox.Size = new System.Drawing.Size(141, 20);
             this.priceTextBox.TabIndex = 7;
@@ -326,7 +334,7 @@
             // dateDateTimePicker
             // 
             this.dateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.quotationBindingSource, "Date", true));
-            this.dateDateTimePicker.Location = new System.Drawing.Point(686, 103);
+            this.dateDateTimePicker.Location = new System.Drawing.Point(695, 103);
             this.dateDateTimePicker.Name = "dateDateTimePicker";
             this.dateDateTimePicker.Size = new System.Drawing.Size(141, 20);
             this.dateDateTimePicker.TabIndex = 9;
@@ -334,14 +342,14 @@
             // securitiesIDTextBox
             // 
             this.securitiesIDTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.quotationBindingSource, "SecuritiesID", true));
-            this.securitiesIDTextBox.Location = new System.Drawing.Point(686, 129);
+            this.securitiesIDTextBox.Location = new System.Drawing.Point(590, 524);
             this.securitiesIDTextBox.Name = "securitiesIDTextBox";
-            this.securitiesIDTextBox.Size = new System.Drawing.Size(141, 20);
+            this.securitiesIDTextBox.Size = new System.Drawing.Size(74, 20);
             this.securitiesIDTextBox.TabIndex = 11;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(853, 51);
+            this.button1.Location = new System.Drawing.Point(590, 403);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 12;
@@ -351,7 +359,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(853, 80);
+            this.button2.Location = new System.Drawing.Point(798, 403);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 13;
@@ -359,11 +367,49 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // quotationIDTextBox
+            // 
+            this.quotationIDTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.quotationBindingSource, "QuotationID", true));
+            this.quotationIDTextBox.Location = new System.Drawing.Point(332, 524);
+            this.quotationIDTextBox.Name = "quotationIDTextBox";
+            this.quotationIDTextBox.Size = new System.Drawing.Size(100, 20);
+            this.quotationIDTextBox.TabIndex = 14;
+            // 
+            // btnUpdate
+            // 
+            this.btnUpdate.Location = new System.Drawing.Point(695, 403);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(75, 23);
+            this.btnUpdate.TabIndex = 15;
+            this.btnUpdate.Text = "Update";
+            this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(695, 46);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(347, 21);
+            this.comboBox1.TabIndex = 16;
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(695, 132);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(347, 21);
+            this.comboBox2.TabIndex = 17;
+            // 
             // QuotationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(941, 450);
+            this.ClientSize = new System.Drawing.Size(1377, 439);
+            this.Controls.Add(this.comboBox2);
+            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.btnUpdate);
+            this.Controls.Add(this.quotationIDTextBox);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(paperInvestmentIDLabel);
@@ -421,5 +467,9 @@
         private System.Windows.Forms.TextBox securitiesIDTextBox;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox quotationIDTextBox;
+        private System.Windows.Forms.Button btnUpdate;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBox2;
     }
 }

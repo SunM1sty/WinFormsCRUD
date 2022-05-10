@@ -35,17 +35,15 @@
             System.Windows.Forms.Label transactionSumLabel;
             System.Windows.Forms.Label customerIDLabel;
             this.bankInvestmentDataGridView = new System.Windows.Forms.DataGridView();
-            this.paperInvestmentDataGridView = new System.Windows.Forms.DataGridView();
-            this.datePurchaseDateTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.dataSaleDateTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.bankDepositIDTextBox = new System.Windows.Forms.TextBox();
-            this.transactionSumTextBox = new System.Windows.Forms.TextBox();
-            this.customerIDTextBox = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bankInvestmentBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dataSet1 = new Database.DataSet1();
+            this.paperInvestmentDataGridView = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -53,26 +51,73 @@
             this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.paperInvestmentBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.datePurchaseDateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.dataSaleDateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.transactionSumTextBox = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.bankInvestmentTableAdapter = new Database.DataSet1TableAdapters.BankInvestmentTableAdapter();
             this.tableAdapterManager = new Database.DataSet1TableAdapters.TableAdapterManager();
             this.paperInvestmentTableAdapter = new Database.DataSet1TableAdapters.PaperInvestmentTableAdapter();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
             datePurchaseLabel = new System.Windows.Forms.Label();
             dataSaleLabel = new System.Windows.Forms.Label();
             bankDepositIDLabel = new System.Windows.Forms.Label();
             transactionSumLabel = new System.Windows.Forms.Label();
             customerIDLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.bankInvestmentDataGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.paperInvestmentDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bankInvestmentBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.paperInvestmentDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.paperInvestmentBindingSource)).BeginInit();
             this.SuspendLayout();
+            // 
+            // datePurchaseLabel
+            // 
+            datePurchaseLabel.AutoSize = true;
+            datePurchaseLabel.Location = new System.Drawing.Point(713, 116);
+            datePurchaseLabel.Name = "datePurchaseLabel";
+            datePurchaseLabel.Size = new System.Drawing.Size(81, 13);
+            datePurchaseLabel.TabIndex = 4;
+            datePurchaseLabel.Text = "Date Purchase:";
+            // 
+            // dataSaleLabel
+            // 
+            dataSaleLabel.AutoSize = true;
+            dataSaleLabel.Location = new System.Drawing.Point(713, 142);
+            dataSaleLabel.Name = "dataSaleLabel";
+            dataSaleLabel.Size = new System.Drawing.Size(57, 13);
+            dataSaleLabel.TabIndex = 6;
+            dataSaleLabel.Text = "Data Sale:";
+            // 
+            // bankDepositIDLabel
+            // 
+            bankDepositIDLabel.AutoSize = true;
+            bankDepositIDLabel.Location = new System.Drawing.Point(713, 172);
+            bankDepositIDLabel.Name = "bankDepositIDLabel";
+            bankDepositIDLabel.Size = new System.Drawing.Size(53, 13);
+            bankDepositIDLabel.TabIndex = 8;
+            bankDepositIDLabel.Text = "Invest ID:";
+            // 
+            // transactionSumLabel
+            // 
+            transactionSumLabel.AutoSize = true;
+            transactionSumLabel.Location = new System.Drawing.Point(712, 89);
+            transactionSumLabel.Name = "transactionSumLabel";
+            transactionSumLabel.Size = new System.Drawing.Size(90, 13);
+            transactionSumLabel.TabIndex = 10;
+            transactionSumLabel.Text = "Transaction Sum:";
+            // 
+            // customerIDLabel
+            // 
+            customerIDLabel.AutoSize = true;
+            customerIDLabel.Location = new System.Drawing.Point(712, 194);
+            customerIDLabel.Name = "customerIDLabel";
+            customerIDLabel.Size = new System.Drawing.Size(68, 13);
+            customerIDLabel.TabIndex = 12;
+            customerIDLabel.Text = "Customer ID:";
             // 
             // bankInvestmentDataGridView
             // 
@@ -91,6 +136,53 @@
             this.bankInvestmentDataGridView.Size = new System.Drawing.Size(644, 210);
             this.bankInvestmentDataGridView.TabIndex = 1;
             // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "BankInvestmentID";
+            this.dataGridViewTextBoxColumn1.HeaderText = "BankInvestmentID";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "DatePurchase";
+            this.dataGridViewTextBoxColumn2.HeaderText = "DatePurchase";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "DataSale";
+            this.dataGridViewTextBoxColumn3.HeaderText = "DataSale";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "BankDepositID";
+            this.dataGridViewTextBoxColumn4.HeaderText = "BankDepositID";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.DataPropertyName = "TransactionSum";
+            this.dataGridViewTextBoxColumn5.HeaderText = "TransactionSum";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.DataPropertyName = "CustomerID";
+            this.dataGridViewTextBoxColumn6.HeaderText = "CustomerID";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            // 
+            // bankInvestmentBindingSource
+            // 
+            this.bankInvestmentBindingSource.DataMember = "BankInvestment";
+            this.bankInvestmentBindingSource.DataSource = this.dataSet1;
+            // 
+            // dataSet1
+            // 
+            this.dataSet1.DataSetName = "DataSet1";
+            this.dataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
             // paperInvestmentDataGridView
             // 
             this.paperInvestmentDataGridView.AutoGenerateColumns = false;
@@ -107,135 +199,6 @@
             this.paperInvestmentDataGridView.Name = "paperInvestmentDataGridView";
             this.paperInvestmentDataGridView.Size = new System.Drawing.Size(644, 220);
             this.paperInvestmentDataGridView.TabIndex = 1;
-            // 
-            // datePurchaseLabel
-            // 
-            datePurchaseLabel.AutoSize = true;
-            datePurchaseLabel.Location = new System.Drawing.Point(713, 116);
-            datePurchaseLabel.Name = "datePurchaseLabel";
-            datePurchaseLabel.Size = new System.Drawing.Size(81, 13);
-            datePurchaseLabel.TabIndex = 4;
-            datePurchaseLabel.Text = "Date Purchase:";
-            // 
-            // datePurchaseDateTimePicker
-            // 
-            this.datePurchaseDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.bankInvestmentBindingSource, "DatePurchase", true));
-            this.datePurchaseDateTimePicker.Location = new System.Drawing.Point(823, 112);
-            this.datePurchaseDateTimePicker.Name = "datePurchaseDateTimePicker";
-            this.datePurchaseDateTimePicker.Size = new System.Drawing.Size(200, 20);
-            this.datePurchaseDateTimePicker.TabIndex = 5;
-            // 
-            // dataSaleLabel
-            // 
-            dataSaleLabel.AutoSize = true;
-            dataSaleLabel.Location = new System.Drawing.Point(713, 142);
-            dataSaleLabel.Name = "dataSaleLabel";
-            dataSaleLabel.Size = new System.Drawing.Size(57, 13);
-            dataSaleLabel.TabIndex = 6;
-            dataSaleLabel.Text = "Data Sale:";
-            // 
-            // dataSaleDateTimePicker
-            // 
-            this.dataSaleDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.bankInvestmentBindingSource, "DataSale", true));
-            this.dataSaleDateTimePicker.Location = new System.Drawing.Point(823, 138);
-            this.dataSaleDateTimePicker.Name = "dataSaleDateTimePicker";
-            this.dataSaleDateTimePicker.Size = new System.Drawing.Size(200, 20);
-            this.dataSaleDateTimePicker.TabIndex = 7;
-            // 
-            // bankDepositIDLabel
-            // 
-            bankDepositIDLabel.AutoSize = true;
-            bankDepositIDLabel.Location = new System.Drawing.Point(717, 171);
-            bankDepositIDLabel.Name = "bankDepositIDLabel";
-            bankDepositIDLabel.Size = new System.Drawing.Size(53, 13);
-            bankDepositIDLabel.TabIndex = 8;
-            bankDepositIDLabel.Text = "Invest ID:";
-            // 
-            // bankDepositIDTextBox
-            // 
-            this.bankDepositIDTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bankInvestmentBindingSource, "BankDepositID", true));
-            this.bankDepositIDTextBox.Location = new System.Drawing.Point(823, 164);
-            this.bankDepositIDTextBox.Name = "bankDepositIDTextBox";
-            this.bankDepositIDTextBox.Size = new System.Drawing.Size(200, 20);
-            this.bankDepositIDTextBox.TabIndex = 9;
-            // 
-            // transactionSumLabel
-            // 
-            transactionSumLabel.AutoSize = true;
-            transactionSumLabel.Location = new System.Drawing.Point(713, 89);
-            transactionSumLabel.Name = "transactionSumLabel";
-            transactionSumLabel.Size = new System.Drawing.Size(90, 13);
-            transactionSumLabel.TabIndex = 10;
-            transactionSumLabel.Text = "Transaction Sum:";
-            // 
-            // transactionSumTextBox
-            // 
-            this.transactionSumTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bankInvestmentBindingSource, "TransactionSum", true));
-            this.transactionSumTextBox.Location = new System.Drawing.Point(823, 86);
-            this.transactionSumTextBox.Name = "transactionSumTextBox";
-            this.transactionSumTextBox.Size = new System.Drawing.Size(200, 20);
-            this.transactionSumTextBox.TabIndex = 11;
-            // 
-            // customerIDLabel
-            // 
-            customerIDLabel.AutoSize = true;
-            customerIDLabel.Location = new System.Drawing.Point(713, 196);
-            customerIDLabel.Name = "customerIDLabel";
-            customerIDLabel.Size = new System.Drawing.Size(68, 13);
-            customerIDLabel.TabIndex = 12;
-            customerIDLabel.Text = "Customer ID:";
-            // 
-            // customerIDTextBox
-            // 
-            this.customerIDTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bankInvestmentBindingSource, "CustomerID", true));
-            this.customerIDTextBox.Location = new System.Drawing.Point(823, 193);
-            this.customerIDTextBox.Name = "customerIDTextBox";
-            this.customerIDTextBox.Size = new System.Drawing.Size(200, 20);
-            this.customerIDTextBox.TabIndex = 13;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(716, 232);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 14;
-            this.button1.Text = "Insert";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // radioButton1
-            // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(716, 40);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(49, 17);
-            this.radioButton1.TabIndex = 15;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "bank";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
-            // 
-            // radioButton2
-            // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(716, 63);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(52, 17);
-            this.radioButton2.TabIndex = 16;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "paper";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
-            // 
-            // bankInvestmentBindingSource
-            // 
-            this.bankInvestmentBindingSource.DataMember = "BankInvestment";
-            this.bankInvestmentBindingSource.DataSource = this.dataSet1;
-            // 
-            // dataSet1
-            // 
-            this.dataSet1.DataSetName = "DataSet1";
-            this.dataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // dataGridViewTextBoxColumn7
             // 
@@ -279,42 +242,63 @@
             this.paperInvestmentBindingSource.DataMember = "PaperInvestment";
             this.paperInvestmentBindingSource.DataSource = this.dataSet1;
             // 
-            // dataGridViewTextBoxColumn1
+            // datePurchaseDateTimePicker
             // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "BankInvestmentID";
-            this.dataGridViewTextBoxColumn1.HeaderText = "BankInvestmentID";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.datePurchaseDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.bankInvestmentBindingSource, "DatePurchase", true));
+            this.datePurchaseDateTimePicker.Location = new System.Drawing.Point(823, 112);
+            this.datePurchaseDateTimePicker.Name = "datePurchaseDateTimePicker";
+            this.datePurchaseDateTimePicker.Size = new System.Drawing.Size(200, 20);
+            this.datePurchaseDateTimePicker.TabIndex = 5;
             // 
-            // dataGridViewTextBoxColumn2
+            // dataSaleDateTimePicker
             // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "DatePurchase";
-            this.dataGridViewTextBoxColumn2.HeaderText = "DatePurchase";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataSaleDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.bankInvestmentBindingSource, "DataSale", true));
+            this.dataSaleDateTimePicker.Location = new System.Drawing.Point(823, 138);
+            this.dataSaleDateTimePicker.Name = "dataSaleDateTimePicker";
+            this.dataSaleDateTimePicker.Size = new System.Drawing.Size(200, 20);
+            this.dataSaleDateTimePicker.TabIndex = 7;
             // 
-            // dataGridViewTextBoxColumn3
+            // transactionSumTextBox
             // 
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "DataSale";
-            this.dataGridViewTextBoxColumn3.HeaderText = "DataSale";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.transactionSumTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bankInvestmentBindingSource, "TransactionSum", true));
+            this.transactionSumTextBox.Location = new System.Drawing.Point(823, 86);
+            this.transactionSumTextBox.Name = "transactionSumTextBox";
+            this.transactionSumTextBox.Size = new System.Drawing.Size(200, 20);
+            this.transactionSumTextBox.TabIndex = 11;
             // 
-            // dataGridViewTextBoxColumn4
+            // button1
             // 
-            this.dataGridViewTextBoxColumn4.DataPropertyName = "BankDepositID";
-            this.dataGridViewTextBoxColumn4.HeaderText = "BankDepositID";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.button1.Location = new System.Drawing.Point(716, 232);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 14;
+            this.button1.Text = "Insert";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // dataGridViewTextBoxColumn5
+            // radioButton1
             // 
-            this.dataGridViewTextBoxColumn5.DataPropertyName = "TransactionSum";
-            this.dataGridViewTextBoxColumn5.HeaderText = "TransactionSum";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(716, 40);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(49, 17);
+            this.radioButton1.TabIndex = 15;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "bank";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
             // 
-            // dataGridViewTextBoxColumn6
+            // radioButton2
             // 
-            this.dataGridViewTextBoxColumn6.DataPropertyName = "CustomerID";
-            this.dataGridViewTextBoxColumn6.HeaderText = "CustomerID";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(716, 63);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(52, 17);
+            this.radioButton2.TabIndex = 16;
+            this.radioButton2.TabStop = true;
+            this.radioButton2.Text = "paper";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
             // 
             // bankInvestmentTableAdapter
             // 
@@ -336,11 +320,29 @@
             // 
             this.paperInvestmentTableAdapter.ClearBeforeFill = true;
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(823, 164);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(262, 21);
+            this.comboBox1.TabIndex = 17;
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(823, 191);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(262, 21);
+            this.comboBox2.TabIndex = 18;
+            // 
             // StoredProcedure
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1072, 590);
+            this.ClientSize = new System.Drawing.Size(1312, 590);
+            this.Controls.Add(this.comboBox2);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.radioButton2);
             this.Controls.Add(this.radioButton1);
             this.Controls.Add(this.button1);
@@ -349,20 +351,18 @@
             this.Controls.Add(dataSaleLabel);
             this.Controls.Add(this.dataSaleDateTimePicker);
             this.Controls.Add(bankDepositIDLabel);
-            this.Controls.Add(this.bankDepositIDTextBox);
             this.Controls.Add(transactionSumLabel);
             this.Controls.Add(this.transactionSumTextBox);
             this.Controls.Add(customerIDLabel);
-            this.Controls.Add(this.customerIDTextBox);
             this.Controls.Add(this.paperInvestmentDataGridView);
             this.Controls.Add(this.bankInvestmentDataGridView);
             this.Name = "StoredProcedure";
             this.Text = "StoredProcedure";
             this.Load += new System.EventHandler(this.StoredProcedure_Load);
             ((System.ComponentModel.ISupportInitialize)(this.bankInvestmentDataGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.paperInvestmentDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bankInvestmentBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.paperInvestmentDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.paperInvestmentBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -393,11 +393,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
         private System.Windows.Forms.DateTimePicker datePurchaseDateTimePicker;
         private System.Windows.Forms.DateTimePicker dataSaleDateTimePicker;
-        private System.Windows.Forms.TextBox bankDepositIDTextBox;
         private System.Windows.Forms.TextBox transactionSumTextBox;
-        private System.Windows.Forms.TextBox customerIDTextBox;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBox2;
     }
 }

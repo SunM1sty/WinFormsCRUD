@@ -7,12 +7,35 @@ namespace Database
 {
     public partial class StoredProcedure : Form
     {
+   
+        #region fields
         private const string _connectionString = "Data Source=DESKTOP-TT3J386\\SQLEXPRESS;Initial Catalog=mark;Integrated Security=True";
+        SqlConnection connection = new SqlConnection(_connectionString);
         private string _customerChoose;
+        private string _commandText;
+        private DateTime _datePurchase;
+        private SqlDataAdapter _adapter;
+        private DateTime _dateSell;
+        private int _customerID;
+        private int _investmentID;
+        private decimal _transactionSum;
+        #endregion
+
 
         public StoredProcedure()
         {
             InitializeComponent();
+
+            connection.Open();
+            _commandText = "SELECT * FROM CustomerView";
+            using (SqlCommand firstCommand = new SqlCommand(_commandText, connection))
+            {
+                _adapter = new SqlDataAdapter(firstCommand);
+                _adapter.Fill(this.dataSet1.CustomerView);
+                comboBox2.DataSource = this.dataSet1.CustomerView;
+                comboBox2.DisplayMember = "Name";
+                comboBox2.ValueMember = "CustomerID";
+            }
         }
 
         private void StoredProcedure_Load(object sender, EventArgs e)
@@ -29,8 +52,8 @@ namespace Database
                 var dataSale = Convert.ToDateTime(dataSaleDateTimePicker.Text);
                 var datePurchase = Convert.ToDateTime(datePurchaseDateTimePicker.Text);
                 var transactionSum = Convert.ToDouble(transactionSumTextBox.Text);
-                var customerID = Convert.ToInt32(customerIDTextBox.Text);
-                var investID = Convert.ToInt32(bankDepositIDTextBox.Text);
+                var customerID = Convert.ToInt32(comboBox2.SelectedValue);
+                var investID = Convert.ToInt32(comboBox1.SelectedValue);
                 if ((_customerChoose != "bank") && (_customerChoose != "paper"))
                 {
                     MessageBox.Show("Choose something ");
@@ -69,7 +92,17 @@ namespace Database
             if (radioButton1.Checked)
             {
                 _customerChoose = "bank";
+                _commandText = "SELECT * FROM BankDepositsView";
+                using (SqlCommand firstCommand = new SqlCommand(_commandText, connection))
+                {
+                    _adapter = new SqlDataAdapter(firstCommand);
+                    _adapter.Fill(this.dataSet1.BankDepositsView);
+                    comboBox1.DataSource = this.dataSet1.BankDepositsView;
+                    comboBox1.DisplayMember = "Description";
+                    comboBox1.ValueMember = "BankDepositID";
+                }
             }
+
         }
 
 
@@ -78,6 +111,15 @@ namespace Database
             if (radioButton2.Checked)
             {
                 _customerChoose = "paper";
+                _commandText = "SELECT * FROM SecuritiesView";
+                using (SqlCommand firstCommand = new SqlCommand(_commandText, connection))
+                {
+                    _adapter = new SqlDataAdapter(firstCommand);
+                    _adapter.Fill(this.dataSet1.SecuritiesView);
+                    comboBox1.DataSource = this.dataSet1.SecuritiesView;
+                    comboBox1.DisplayMember = "Description";
+                    comboBox1.ValueMember = "SecuritiesID";
+                }
             }
         }
     }

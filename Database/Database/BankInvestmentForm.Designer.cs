@@ -66,6 +66,10 @@
             this.customerIDTextBox = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.bankInvestmentIDTextBox = new System.Windows.Forms.TextBox();
+            this.btnUpdate = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
             datePurchaseLabel = new System.Windows.Forms.Label();
             dataSaleLabel = new System.Windows.Forms.Label();
             bankDepositIDLabel = new System.Windows.Forms.Label();
@@ -108,7 +112,7 @@
             // transactionSumLabel
             // 
             transactionSumLabel.AutoSize = true;
-            transactionSumLabel.Location = new System.Drawing.Point(675, 132);
+            transactionSumLabel.Location = new System.Drawing.Point(673, 135);
             transactionSumLabel.Name = "transactionSumLabel";
             transactionSumLabel.Size = new System.Drawing.Size(90, 13);
             transactionSumLabel.TabIndex = 10;
@@ -117,7 +121,7 @@
             // customerIDLabel
             // 
             customerIDLabel.AutoSize = true;
-            customerIDLabel.Location = new System.Drawing.Point(675, 158);
+            customerIDLabel.Location = new System.Drawing.Point(675, 161);
             customerIDLabel.Name = "customerIDLabel";
             customerIDLabel.Size = new System.Drawing.Size(68, 13);
             customerIDLabel.TabIndex = 12;
@@ -175,7 +179,7 @@
             this.bankInvestmentBindingNavigator.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.bankInvestmentBindingNavigator.Name = "bankInvestmentBindingNavigator";
             this.bankInvestmentBindingNavigator.PositionItem = this.bindingNavigatorPositionItem;
-            this.bankInvestmentBindingNavigator.Size = new System.Drawing.Size(1026, 25);
+            this.bankInvestmentBindingNavigator.Size = new System.Drawing.Size(1212, 25);
             this.bankInvestmentBindingNavigator.TabIndex = 0;
             this.bankInvestmentBindingNavigator.Text = "bindingNavigator1";
             // 
@@ -212,6 +216,7 @@
             this.bindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true;
             this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(23, 22);
             this.bindingNavigatorMoveFirstItem.Text = "Move first";
+            this.bindingNavigatorMoveFirstItem.Click += new System.EventHandler(this.bindingNavigator);
             // 
             // bindingNavigatorMovePreviousItem
             // 
@@ -221,6 +226,7 @@
             this.bindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = true;
             this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(23, 22);
             this.bindingNavigatorMovePreviousItem.Text = "Move previous";
+            this.bindingNavigatorMovePreviousItem.Click += new System.EventHandler(this.bindingNavigator);
             // 
             // bindingNavigatorSeparator
             // 
@@ -250,6 +256,7 @@
             this.bindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = true;
             this.bindingNavigatorMoveNextItem.Size = new System.Drawing.Size(23, 22);
             this.bindingNavigatorMoveNextItem.Text = "Move next";
+            this.bindingNavigatorMoveNextItem.Click += new System.EventHandler(this.bindingNavigator);
             // 
             // bindingNavigatorMoveLastItem
             // 
@@ -259,6 +266,7 @@
             this.bindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = true;
             this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(23, 22);
             this.bindingNavigatorMoveLastItem.Text = "Move last";
+            this.bindingNavigatorMoveLastItem.Click += new System.EventHandler(this.bindingNavigator);
             // 
             // bindingNavigatorSeparator2
             // 
@@ -347,15 +355,15 @@
             // bankDepositIDTextBox
             // 
             this.bankDepositIDTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bankInvestmentBindingSource, "BankDepositID", true));
-            this.bankDepositIDTextBox.Location = new System.Drawing.Point(785, 103);
+            this.bankDepositIDTextBox.Location = new System.Drawing.Point(696, 472);
             this.bankDepositIDTextBox.Name = "bankDepositIDTextBox";
-            this.bankDepositIDTextBox.Size = new System.Drawing.Size(140, 20);
+            this.bankDepositIDTextBox.Size = new System.Drawing.Size(60, 20);
             this.bankDepositIDTextBox.TabIndex = 9;
             // 
             // transactionSumTextBox
             // 
             this.transactionSumTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bankInvestmentBindingSource, "TransactionSum", true));
-            this.transactionSumTextBox.Location = new System.Drawing.Point(785, 129);
+            this.transactionSumTextBox.Location = new System.Drawing.Point(785, 132);
             this.transactionSumTextBox.Name = "transactionSumTextBox";
             this.transactionSumTextBox.Size = new System.Drawing.Size(140, 20);
             this.transactionSumTextBox.TabIndex = 11;
@@ -363,14 +371,14 @@
             // customerIDTextBox
             // 
             this.customerIDTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bankInvestmentBindingSource, "CustomerID", true));
-            this.customerIDTextBox.Location = new System.Drawing.Point(785, 155);
+            this.customerIDTextBox.Location = new System.Drawing.Point(773, 472);
             this.customerIDTextBox.Name = "customerIDTextBox";
-            this.customerIDTextBox.Size = new System.Drawing.Size(140, 20);
+            this.customerIDTextBox.Size = new System.Drawing.Size(61, 20);
             this.customerIDTextBox.TabIndex = 13;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(931, 71);
+            this.button1.Location = new System.Drawing.Point(690, 404);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 14;
@@ -380,7 +388,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(932, 101);
+            this.button2.Location = new System.Drawing.Point(909, 404);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 15;
@@ -388,11 +396,49 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // bankInvestmentIDTextBox
+            // 
+            this.bankInvestmentIDTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bankInvestmentBindingSource, "BankInvestmentID", true));
+            this.bankInvestmentIDTextBox.Location = new System.Drawing.Point(855, 472);
+            this.bankInvestmentIDTextBox.Name = "bankInvestmentIDTextBox";
+            this.bankInvestmentIDTextBox.Size = new System.Drawing.Size(70, 20);
+            this.bankInvestmentIDTextBox.TabIndex = 16;
+            // 
+            // btnUpdate
+            // 
+            this.btnUpdate.Location = new System.Drawing.Point(801, 404);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(75, 23);
+            this.btnUpdate.TabIndex = 17;
+            this.btnUpdate.Text = "Update";
+            this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(785, 103);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(308, 21);
+            this.comboBox1.TabIndex = 18;
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(785, 158);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(308, 21);
+            this.comboBox2.TabIndex = 19;
+            // 
             // BankInvestmentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1026, 450);
+            this.ClientSize = new System.Drawing.Size(1212, 450);
+            this.Controls.Add(this.comboBox2);
+            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.btnUpdate);
+            this.Controls.Add(this.bankInvestmentIDTextBox);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(datePurchaseLabel);
@@ -454,5 +500,9 @@
         private System.Windows.Forms.TextBox customerIDTextBox;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox bankInvestmentIDTextBox;
+        private System.Windows.Forms.Button btnUpdate;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBox2;
     }
 }
